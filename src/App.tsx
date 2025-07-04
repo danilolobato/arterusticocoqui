@@ -1,6 +1,3 @@
-Here's the fixed version with all missing closing brackets added:
-
-```javascript
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Hammer, Settings, TreePine, Award, Users, Clock, Star, ChevronLeft, ChevronRight, Zap, Shield, Heart, CheckCircle, Wrench, Eye, ArrowUp } from 'lucide-react';
 
@@ -297,7 +294,7 @@ function App() {
 
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M20 20c0 11.046-8.954 20-20 20v-40c11.046 0 20 8.954 20 20z"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M20 20c0 11.046-8.954 20-20 20v-40c11.046 0 20 8.954 20 20z\"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -478,4 +475,329 @@ function App() {
       </section>
 
       {/* Featured Projects Carousel */}
-      <section className="py-24 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow
+      <section id="galeria" className="py-24 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <span className="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-6">
+              Galería de Proyectos
+            </span>
+            <h3 className="text-5xl font-bold text-white mb-6">
+              Obras Maestras Recientes
+            </h3>
+            <p className="text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Cada proyecto es una historia única de artesanía y dedicación
+            </p>
+          </div>
+
+          <div className="relative max-w-6xl mx-auto">
+            <div className="overflow-hidden rounded-3xl shadow-2xl">
+              <div 
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentProject * 100}%)` }}
+              >
+                {featuredProjects.map((project, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    <div className="relative h-96 md:h-[500px]">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                        <div className="max-w-2xl">
+                          <h4 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                            {project.title}
+                          </h4>
+                          <p className="text-xl text-slate-200 mb-6 leading-relaxed">
+                            {project.description}
+                          </p>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                              <p className="text-emerald-300 font-semibold">Detalles</p>
+                              <p className="text-white">{project.details}</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                              <p className="text-emerald-300 font-semibold">Duración</p>
+                              <p className="text-white">{project.duration}</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                              <p className="text-emerald-300 font-semibold">Cliente</p>
+                              <p className="text-white">{project.client}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation buttons */}
+            <button 
+              onClick={() => setCurrentProject((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length)}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button 
+              onClick={() => setCurrentProject((prev) => (prev + 1) % featuredProjects.length)}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Indicators */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {featuredProjects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentProject(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentProject 
+                      ? 'bg-emerald-400 scale-125' 
+                      : 'bg-white/30 hover:bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonios" className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23059669' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <span className="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-6">
+              Testimonios
+            </span>
+            <h3 className="text-5xl font-bold text-transparent bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 bg-clip-text mb-6">
+              Voces de Nuestros Clientes
+            </h3>
+            <p className="text-2xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
+              Más de 800 familias han confiado en nuestra artesanía
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
+              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
+              
+              <div className="p-8 md:p-12">
+                <div className="flex items-center justify-center mb-8">
+                  <div className="flex space-x-1">
+                    {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="h-8 w-8 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                </div>
+
+                <blockquote className="text-2xl md:text-3xl text-slate-700 text-center mb-8 leading-relaxed font-medium italic">
+                  "{testimonials[currentTestimonial].text}"
+                </blockquote>
+
+                <div className="flex items-center justify-center space-x-4">
+                  <img 
+                    src={testimonials[currentTestimonial].avatar} 
+                    alt={testimonials[currentTestimonial].name}
+                    className="w-16 h-16 rounded-full object-cover border-4 border-emerald-200"
+                  />
+                  <div className="text-center">
+                    <p className="text-xl font-bold text-slate-800">
+                      {testimonials[currentTestimonial].name}
+                    </p>
+                    <p className="text-emerald-600 font-medium">
+                      {testimonials[currentTestimonial].project}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation dots */}
+              <div className="flex justify-center pb-8 space-x-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial 
+                        ? 'bg-emerald-500 scale-125' 
+                        : 'bg-slate-300 hover:bg-slate-400'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-24 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M20 20c0 11.046-8.954 20-20 20v-40c11.046 0 20 8.954 20 20z\"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <span className="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-6">
+              Contacto
+            </span>
+            <h3 className="text-5xl font-bold text-white mb-6">
+              Hablemos de Tu Proyecto
+            </h3>
+            <p className="text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Cada gran obra comienza con una conversación
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            {[
+              {
+                icon: <Phone className="h-12 w-12" />,
+                title: "Teléfono",
+                info: "+1 (787) 555-0123",
+                description: "Lunes a Sábado, 7:00 AM - 6:00 PM",
+                color: "from-emerald-500 to-teal-500"
+              },
+              {
+                icon: <Mail className="h-12 w-12" />,
+                title: "Email",
+                info: "info@arterusticocoqui.com",
+                description: "Respuesta en menos de 24 horas",
+                color: "from-blue-500 to-indigo-500"
+              },
+              {
+                icon: <MapPin className="h-12 w-12" />,
+                title: "Taller",
+                info: "Calle Artesanos #123, Caguas, PR",
+                description: "Visitas con cita previa",
+                color: "from-teal-500 to-cyan-500"
+              }
+            ].map((contact, index) => (
+              <div 
+                key={index}
+                className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 hover:from-white/20 hover:to-white/10 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-white/10 animate-fade-in-up"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <div className={`bg-gradient-to-r ${contact.color} p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  {contact.icon}
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors duration-300">
+                  {contact.title}
+                </h4>
+                <p className="text-xl text-emerald-300 mb-2 font-semibold">
+                  {contact.info}
+                </p>
+                <p className="text-slate-300 group-hover:text-white transition-colors duration-300">
+                  {contact.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-16 animate-fade-in-up animation-delay-600">
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-3xl p-8 max-w-2xl mx-auto border border-emerald-200">
+              <h4 className="text-2xl font-bold text-slate-800 mb-4">¿Listo para comenzar?</h4>
+              <p className="text-lg text-slate-600 mb-6">
+                Contáctanos hoy y convirtamos tu visión en una obra maestra de madera
+              </p>
+              <button className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:via-teal-500 hover:to-cyan-500 text-white px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-emerald-500/25">
+                Solicitar Cotización Gratuita
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-slate-800 via-slate-900 to-black text-white py-16 border-t-4 border-emerald-500">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="animate-fade-in-up">
+              <div className="flex items-center space-x-3 mb-6">
+                <TreePine className="h-10 w-10 text-emerald-400" />
+                <div>
+                  <h5 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+                    Arte Rustico Coqui
+                  </h5>
+                  <p className="text-emerald-300 text-sm">Carpintería de la Vieja Escuela</p>
+                </div>
+              </div>
+              <p className="text-slate-300 leading-relaxed mb-6">
+                Preservando las tradiciones artesanales de Puerto Rico desde 2009. 
+                Cada pieza que creamos lleva el alma de nuestros ancestros y la promesa 
+                de perdurar por generaciones.
+              </p>
+              <div className="flex space-x-4">
+                {[Zap, Shield, Heart].map((Icon, index) => (
+                  <div key={index} className="bg-gradient-to-r from-emerald-600 to-teal-600 p-3 rounded-full hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="animate-fade-in-up animation-delay-200">
+              <h6 className="text-xl font-bold text-emerald-300 mb-6">Servicios</h6>
+              <ul className="space-y-3">
+                {[
+                  "Muebles Rústicos Personalizados",
+                  "Puertas y Ventanas Coloniales", 
+                  "Restauración de Antigüedades",
+                  "Tallado Artesanal",
+                  "Cocinas de Madera Maciza",
+                  "Consultoría en Diseño"
+                ].map((service, index) => (
+                  <li key={index} className="text-slate-300 hover:text-emerald-300 transition-colors duration-300 cursor-pointer">
+                    {service}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="animate-fade-in-up animation-delay-400">
+              <h6 className="text-xl font-bold text-emerald-300 mb-6">Horarios</h6>
+              <div className="space-y-3 text-slate-300">
+                <div className="flex justify-between">
+                  <span>Lunes - Viernes</span>
+                  <span className="text-emerald-300">7:00 AM - 6:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sábados</span>
+                  <span className="text-emerald-300">8:00 AM - 4:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Domingos</span>
+                  <span className="text-slate-400">Cerrado</span>
+                </div>
+              </div>
+              
+              <div className="mt-8 p-6 bg-gradient-to-r from-emerald-900/30 to-teal-900/30 rounded-2xl border border-emerald-500/20">
+                <h6 className="text-lg font-bold text-emerald-300 mb-2">Garantía de Por Vida</h6>
+                <p className="text-sm text-slate-300">
+                  Todos nuestros trabajos incluyen garantía de por vida en estructura y acabados.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-700 mt-12 pt-8 text-center">
+            <p className="text-slate-400">
+              © 2024 Arte Rustico Coqui. Todos los derechos reservados. 
+              <span className="text-emerald-300"> Hecho con ❤️ en Puerto Rico</span>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
